@@ -23,6 +23,10 @@ static void signalHandler(int signo) {
     stopmain = 1;
 }
 
+static void signalSIGPIPE(int signo) {
+    fprintf ( stderr, "\n<SIGPIPE>\n");
+}
+
 static void usage ( char *name ) {
     
     fprintf(stderr, "Usage: %s [-p PORTS] [-v VERBOSE]\n", name);
@@ -41,6 +45,7 @@ int main(int argc, char** argv) {
     signal(SIGHUP, signalHandler);
     signal(SIGINT, signalHandler);
     signal(SIGUSR1, signalHandler);
+    signal(SIGPIPE, signalSIGPIPE);
 
     while ((opt = getopt(argc, argv, "v:p:")) != -1) {
         switch (opt) {

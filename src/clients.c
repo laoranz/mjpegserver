@@ -24,6 +24,9 @@ client_handler_t clients_find_client ( char *name ) {
     
     int i = 0;
     
+    if ( name == NULL )
+        return NULL;
+    
     for ( i=0; m_clients[i].name!=NULL; i++ ) {
         
         if ( strcmp( name, m_clients[i].name) == 0 ) {
